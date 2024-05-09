@@ -10,7 +10,7 @@ using WebApplication2.Models;
 
 namespace WebApplication2.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class EmployeesController : Controller
     {
         private office_sidpdEntities db = new office_sidpdEntities();
@@ -37,6 +37,7 @@ namespace WebApplication2.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize(Roles ="Admin, Customer")]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +48,7 @@ namespace WebApplication2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, Customer")]
         public ActionResult Create([Bind(Include = "id,name,salary")] Employee employee)
         {
             if (ModelState.IsValid)
@@ -60,6 +62,7 @@ namespace WebApplication2.Controllers
         }
 
         // GET: Employees/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,6 +82,7 @@ namespace WebApplication2.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "id,name,salary")] Employee employee)
         {
             if (ModelState.IsValid)
@@ -91,6 +95,7 @@ namespace WebApplication2.Controllers
         }
 
         // GET: Employees/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

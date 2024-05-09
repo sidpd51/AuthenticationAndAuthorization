@@ -12,19 +12,12 @@ namespace WebApplication2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class UserRole
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            this.UserRoles = new HashSet<UserRole>();
-        }
-    
         public int id { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
+        public Nullable<int> userid { get; set; }
+        public string Roles { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual User User { get; set; }
     }
 }
