@@ -10,17 +10,22 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            @Html.ActionLink("Authentication Practice", "Create", "Employees", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Authentication Practice", "", "", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav d-flex justify-content-between">
-                    <li>@Html.ActionLink("Get List", "Index", "Employees", new { area = "" }, new { @class = "nav-link me-3" })</li>
-                    <li>@Html.ActionLink("Create", "Create", "Employees", new { area = "" }, new { @class = "nav-link me-3" })</li>
                     @if (User.Identity.IsAuthenticated)
                     {
+                        <li>@Html.ActionLink("Get List", "Index", "Employees", new { area = "" }, new { @class = "nav-link me-3" })</li>
+                        
+                        if (User.IsInRole("admin"))
+                        {
+                            <li>@Html.ActionLink("Create", "Create", "Employees", new { area = "" }, new { @class = "nav-link me-3" })</li>
+                        }
+
                         <li class="d-flex justify-content-center align-items-center me-3"><a class="text-white text-decoration-none">Dear -@User.Identity.Name</a></li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account", new { area = "" }, new { @class = "nav-link me-3" })</li>
                     }

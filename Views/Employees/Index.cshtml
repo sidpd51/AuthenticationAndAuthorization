@@ -29,9 +29,18 @@
             @Html.DisplayFor(modelItem => item.salary)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Details", "Details", new { id = item.id })
+            @if (User.IsInRole("admin"))
+            {
+                @:| @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            }
+
+            @if (User.IsInRole("customer"))
+            {
+                @:| @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+            }
+
         </td>
     </tr>
 }
